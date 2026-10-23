@@ -1,0 +1,92 @@
+{
+ "tarih": "2026-10-18",
+ "mod": "TEPKI",
+ "tutma_hafta": 2,
+ "giris_gunu": "2026-10-19",
+ "cikis_gunu": "2026-10-30",
+ "genislik": 4.7,
+ "ciro_esik_tl": 25437646,
+ "taranan": 542,
+ "hisseler": [
+  {
+   "sembol": "DURKN",
+   "pazar_kapanis": 9.64,
+   "perf_1m": -51.5,
+   "perf_3m": -52.7,
+   "rsi": 20,
+   "ciro_m": 22.2
+  },
+  {
+   "sembol": "SANFM",
+   "pazar_kapanis": 4.18,
+   "perf_1m": -51.0,
+   "perf_3m": -54.4,
+   "rsi": 31,
+   "ciro_m": 21.2
+  },
+  {
+   "sembol": "BVSAN",
+   "pazar_kapanis": 61.2,
+   "perf_1m": -47.7,
+   "perf_3m": -50.5,
+   "rsi": 26,
+   "ciro_m": 25.3
+  },
+  {
+   "sembol": "PAPIL",
+   "pazar_kapanis": 6.69,
+   "perf_1m": -44.7,
+   "perf_3m": -52.1,
+   "rsi": 24,
+   "ciro_m": 22.0
+  },
+  {
+   "sembol": "BRKVY",
+   "pazar_kapanis": 45.14,
+   "perf_1m": -43.1,
+   "perf_3m": -46.0,
+   "rsi": 27,
+   "ciro_m": 11.6
+  },
+  {
+   "sembol": "HURGZ",
+   "pazar_kapanis": 4.43,
+   "perf_1m": -42.4,
+   "perf_3m": -30.0,
+   "rsi": 25,
+   "ciro_m": 12.3
+  },
+  {
+   "sembol": "EGEPO",
+   "pazar_kapanis": 5.33,
+   "perf_1m": -41.7,
+   "perf_3m": -71.6,
+   "rsi": 22,
+   "ciro_m": 22.4
+  },
+  {
+   "sembol": "PRDGS",
+   "pazar_kapanis": 3.87,
+   "perf_1m": -41.5,
+   "perf_3m": -43.1,
+   "rsi": 31,
+   "ciro_m": 17.2
+  },
+  {
+   "sembol": "KOPOL",
+   "pazar_kapanis": 2.94,
+   "perf_1m": -40.4,
+   "perf_3m": -56.1,
+   "rsi": 26,
+   "ciro_m": 16.6
+  },
+  {
+   "sembol": "PAMEL",
+   "pazar_kapanis": 40,
+   "perf_1m": -40.3,
+   "perf_3m": -51.8,
+   "rsi": 23,
+   "ciro_m": 10.7
+  }
+ ]
+}

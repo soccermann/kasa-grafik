@@ -1,0 +1,12 @@
+{"symbol":"GARAN","tf":"1 saat","date":"16.10.2026",
+ "title":"GARAN — Dikdörtgen Kırılımı + Geri Test (1 saat)",
+ "subtitle":"127,00–131,90 bandı yukarı kırıldı; kırılım seviyesi test ediliyor",
+ "ylim":[125.5,138],
+ "zones":[{"x0":5,"x1":55,"lo":127.0,"hi":131.9,"color":"blue","alpha":0.08},{"x0":-6,"x1":-1,"lo":131.0,"hi":132.0,"color":"green","alpha":0.18}],
+ "lines":[{"y":131.9,"x0":5,"color":"blue","label":"Direnç → destek 131,90"},
+          {"y":127.0,"x0":5,"x1":55,"color":"gray","style":"dashed","label":"Taban 127,00"},
+          {"y":133.9,"x0":-8,"color":"orange","style":"dotted","label":"Hedef 1: 133,90"},
+          {"y":136.6,"x0":-8,"color":"orange","style":"dotted","label":"Hedef 2: 136,60"},
+          {"y":129.9,"x0":-8,"color":"down","style":"dashed","label":"Stop: 129,90 altı"}],
+ "arrows":[{"x":55,"y":132.7,"label":"Kırılım 15.10 11:00","color":"up","dx":-130,"dy":40}],
+ "info":"Formasyon: Dikdörtgen (127,00–131,90)\nGiriş bölgesi: 131,00–132,00\nHedef 1: 133,90 · Hedef 2: 136,60\nStop: 1s kapanış 129,90 altı","info_loc":"tl"}

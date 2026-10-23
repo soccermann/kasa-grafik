@@ -1,0 +1,9 @@
+{"tarih":"2026-10-19","tarama":"umit liste","piyasa":"XU100 11.721,72 (16.10: -%2,89); günlük teknik GÜÇLÜ SAT",
+ "aday_sayisi":11,
+ "sinyaller":[
+ {"sembol":"DOCO","sinif":"KASA","formasyon":"Dikdörtgen kırılımı","zaman_dilimi":"1s","giris":[10950,11100],"hedefler":[11410,11900],"stop":10850,"kirilim":10905,"sabah_fiyati":11100,"not":"düşük likidite ~84 mn TL"},
+ {"sembol":"AKFYE","sinif":"IZLEME","formasyon":"Dar bant sıkışma","zaman_dilimi":"1s","onay":3.93,"hedefler":[4.12,4.40],"gecersiz":3.70,"sabah_fiyati":3.92},
+ {"sembol":"GLYHO","sinif":"IZLEME","formasyon":"Dikdörtgen","zaman_dilimi":"1s","onay":17.91,"hedefler":[18.44,18.64],"gecersiz":16.90,"sabah_fiyati":17.51,"not":"likidite ~94 mn TL"},
+ {"sembol":"ETILR","sinif":"IZLEME","formasyon":"Boğa bayrağı / düşen kanal","zaman_dilimi":"1s","onay":7.31,"hedefler":[7.88],"gecersiz":6.80,"sabah_fiyati":7.07,"not":"düşük likidite ~35 mn TL"},
+ {"sembol":"OZYSR","sinif":"IZLEME","formasyon":"Dikdörtgen","zaman_dilimi":"1s","onay":12.10,"hedefler":[12.73],"gecersiz":11.40,"sabah_fiyati":12.02,"not":"çok düşük likidite ~27 mn TL"}
+ ]}

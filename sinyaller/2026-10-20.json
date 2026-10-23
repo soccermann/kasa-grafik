@@ -1,0 +1,8 @@
+{"tarih":"2026-10-20","tarama":"umit liste","taranan":17,"aday":7,
+ "piyasa":"XU100 11.430,14 · günlük/4s/1s teknik görünüm GÜÇLÜ SAT",
+ "sinyaller":[
+  {"sembol":"GARAN","sinif":"KASA","formasyon":"Dikdörtgen kırılımı + geri test","zaman_dilimi":"1h","kirilim":131.9,"giris":[131.0,132.5],"hedefler":[134.0,136.8],"stop":129.9,"sabah_fiyati":132.5},
+  {"sembol":"METRO","sinif":"KASA","formasyon":"Boğa bayrağı kırılımı","zaman_dilimi":"1h","kirilim":7.92,"giris":[7.85,7.95],"hedefler":[8.16,8.28],"stop":7.75,"sabah_fiyati":7.94,"not":"düşük likidite (~58 mn TL)"},
+  {"sembol":"AKFYE","sinif":"KASA","formasyon":"Boğa bayrağı / dar bant kırılımı","zaman_dilimi":"1h","kirilim":3.90,"giris":[3.88,3.93],"hedefler":[4.06,4.25],"stop":3.85,"sabah_fiyati":3.92},
+  {"sembol":"SOKM","sinif":"IZLEME","formasyon":"Yükselen üçgen","zaman_dilimi":"1h","onay":60.0,"gecersiz":56.25,"hedefler":[61.9,66.5],"sabah_fiyati":58.25}
+ ]}

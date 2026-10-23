@@ -1,0 +1,8 @@
+{"tarih":"2026-10-23","piyasa":"XU100 22.10 kapanış 11.220,37 (-%3,08); günlük/4s/1s/15dk teknik görünüm GÜÇLÜ SAT, RSI 28","taranan":{"umit_liste_kesisim":14,"aday":7},
+"sinyaller":[
+{"sembol":"EFOR","sinif":"KASA","formasyon":"Boğa bayrağı kırılımı","zaman_dilimi":"1h","bant":[16.18,17.53],"kirilim":17.53,"giris":[17.5,17.9],"hedefler":[18.5,18.85],"stop":17.0,"sabah_fiyati":17.87},
+{"sembol":"USHOL","sinif":"KASA","formasyon":"Bayrak kırılımı + geri test","zaman_dilimi":"1h","bant":[66.4,69.0],"kirilim":69.0,"giris":[68.8,69.8],"hedefler":[71.6,73.0],"stop":67.9,"sabah_fiyati":69.0,"not":"Düşük likidite ~67 mn TL; 21.10 kırılımı sonrası geri test"},
+{"sembol":"RYGYO","sinif":"IZLEME","formasyon":"Boğa bayrağı","zaman_dilimi":"1h","bant":[47.92,50.15],"onay":50.2,"gecersiz":47.9,"hedefler":[51.85,54.0],"sabah_fiyati":49.54,"not":"Düşük likidite ~79 mn TL"},
+{"sembol":"AKFYE","sinif":"IZLEME","formasyon":"Yükselen üçgen","zaman_dilimi":"4h","bant":[3.22,4.02],"onay":4.03,"gecersiz":3.87,"hedefler":[4.23,4.42],"sabah_fiyati":3.98,"not":"Düşük likidite ~78 mn TL"},
+{"sembol":"KLSYN","sinif":"IZLEME","formasyon":"Bant tavanında bayrak","zaman_dilimi":"1h","bant":[14.45,15.0],"onay":15.25,"gecersiz":14.45,"hedefler":[16.2,16.76],"sabah_fiyati":14.83,"not":"Çok düşük likidite ~24 mn TL; 20.10 kırılımı geri alındı"}
+]}

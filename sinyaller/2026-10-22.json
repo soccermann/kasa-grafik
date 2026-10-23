@@ -1,0 +1,10 @@
+{"tarih":"2026-10-22","piyasa":"XU100 21.10 kapanış 11.577,12 (-%1,87); günlük/4s/1s teknik görünüm SAT","taranan":{"umit_liste_kesisim":20,"aday":12},
+"sinyaller":[
+{"sembol":"TAVHL","sinif":"KASA","formasyon":"Dikdörtgen kırılımı + geri test","zaman_dilimi":"1h","bant":[264.25,280.5],"kirilim":280.5,"giris":[280.5,285.0],"hedefler":[293.0,296.75],"stop":276.0,"sabah_fiyati":287.0,"not":"Bilanço 28.10"},
+{"sembol":"ENJSA","sinif":"KASA","formasyon":"Yatay bant kırılımı + geri test","zaman_dilimi":"4h","bant":[109.0,115.5],"kirilim":115.5,"giris":[114.6,115.8],"hedefler":[119.6,122.0],"stop":113.5,"sabah_fiyati":115.4,"not":"Bilanço 30.10"},
+{"sembol":"USHOL","sinif":"KASA","formasyon":"Boğa bayrağı kırılımı","zaman_dilimi":"1h","bant":[66.4,69.0],"kirilim":69.0,"giris":[68.8,69.8],"hedefler":[71.0,73.0],"stop":67.9,"sabah_fiyati":69.8,"not":"15dk RSI 77, düşük likidite ~53 mn TL"},
+{"sembol":"HALKB","sinif":"IZLEME","formasyon":"Boğa bayrağı","zaman_dilimi":"1h","bant":[44.06,45.02],"onay":45.02,"gecersiz":44.0,"hedefler":[46.8,47.5],"sabah_fiyati":44.26},
+{"sembol":"YKBNK","sinif":"IZLEME","formasyon":"Dikdörtgen","zaman_dilimi":"1h","bant":[35.16,36.78],"onay":36.8,"gecersiz":35.9,"hedefler":[38.0,38.4],"sabah_fiyati":36.42,"not":"Bilanço 03.11"},
+{"sembol":"KLSYN","sinif":"IZLEME","formasyon":"Bant tavanında bayrak","zaman_dilimi":"1h","bant":[14.48,15.02],"onay":15.02,"gecersiz":14.4,"hedefler":[16.2,16.76],"sabah_fiyati":14.75,"not":"Düşük likidite ~75 mn TL"},
+{"sembol":"DOCO","sinif":"IZLEME","formasyon":"Yükselen üçgen","zaman_dilimi":"4h","bant":[10790,11350],"onay":11350,"gecersiz":10790,"hedefler":[11900],"sabah_fiyati":11220,"not":"Çok düşük likidite ~60 mn TL"}
+]}
