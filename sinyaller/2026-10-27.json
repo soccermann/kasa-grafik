@@ -1,0 +1,8 @@
+{"tarih":"2026-10-27","tarama":"umit liste","eleme_sonrasi":10,"aday":8,
+ "piyasa":"XU100 11.151,96 · günlük Sat, 4s Sat",
+ "sinyaller":[
+  {"sembol":"RYGYO","sinif":"IZLEME","formasyon":"Dikdörtgen / yatay bant 44,30-52,85","zaman_dilimi":"1h",
+   "onay":52.85,"giris":[52.90,53.50],"hedefler":[54.05,61.40],"stop":49.20,"gecersiz":49.20,"sabah_fiyati":51.50,
+   "not":"Günlük işlem ~139 mn TL"}
+ ],
+ "elenenler":{"GMTAS":"1s fiyat 49,2-49,8 aralığına kilitli","SOKM":"günlük 54-60 bant ortasında","YKBNK":"35,2-36,8 bandı, günlük trend yatay","KLSYN":"16,76 sahte kırılım sonrası bant içine döndü","USHOL":"V-dönüş, formasyon yok, düşük likidite","BEGYO":"SMA200 altı, aşırı uzamış, düşük likidite","ENTRA":"günlük düşüş trendi, düşük likidite"}}
