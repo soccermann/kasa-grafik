@@ -1,13 +1,14 @@
-"""SVTI 15dk 43 — gün sonu raporu (TradingView 'SVTI NET v3.1' kuralının birebir Python karşılığı).
+"""SVTI 15dk — gün sonu raporu (svti15_webhook.pine ile aynı kural).
 
-KURAL (15dk):
-  AL : SVTI 0'ı yukarı keser + yeşil mum (kapanış > açılış) + hacim >= 20 bar ort. x1,5
+KURAL (v3, 2026-11-07'den itibaren):
+  AL : 15dk bar kapanışında: SVTI 0'ı yukarı keser + yeşil mum (kapanış > açılış) + hacim >= 20 bar ort. x1,5
        + XU100 15dk SVTI > 0   (ortalama mevcut barı da içerir, Pine ta.sma gibi)
-  SAT: kapanış < ATR(14, RMA) x 3 iz süren stop (stop sadece yukarı gider)
-  Giriş/çıkış bar kapanışında. Komisyon %0,1 gidiş-dönüş.
+  SAT: 10dk bar kapanışında: kapanış < 10dk ATR(14, RMA) x 3 iz süren stop (stop sadece yukarı gider).
+       Başlangıç stop'u = giriş fiyatı - son tamamlanan 10dk ATR x 3. Aynı anda biten 10dk ve 15dk barında önce SAT, sonra AL.
+  Komisyon %0,1 gidiş-dönüş.
   5DK ONAYI (v2): her 15dk AL, son 30 dakika içinde aynı kuralla 5dk'da AL gelmişse "onay5=1" işaretlenir.
   Tüm 15dk AL'ler takip edilir; raporda hem tümü hem 5dk onaylılar ayrı istatistiklenir.
-  GİRDİ VERİSİ 5 DAKİKALIKTIR; 15dk barları betik kendisi oluşturur (10:00'dan itibaren 15'er dk, açılış seansı ayrı bar).
+  GİRDİ VERİSİ 5 DAKİKALIKTIR; 15dk ve 10dk barlarını betik kendisi oluşturur (10:00'dan itibaren 15'er dk, açılış seansı ayrı bar).
 
 KULLANIM:
   python3 svti15.py --bugun YYYY-MM-DD --xu <XU100_15m_dosyası> --bar SEMBOL=<dosya> [--bar ...]
@@ -25,15 +26,16 @@ def load(p):
     return d["bars"] if "bars" in d else d
 def tstr(t): return (dt.datetime.fromtimestamp(t,dt.timezone.utc)+TZ).strftime("%Y-%m-%d %H:%M")
 def agg(D,mins):
-    out={k:[] for k in "tohlcv"}; cur=None
+    out={k:[] for k in "tohlcve"}; cur=None
     for i in range(len(D["c"])):
         tt=dt.datetime.fromtimestamp(D["t"][i],dt.timezone.utc)+TZ
         m=tt.hour*60+tt.minute-600; key=(tt.date(), m//mins if m>=0 else -1)
         if key!=cur:
             cur=key
             for k in "tohlc": out[k].append(D[k][i])
-            out["v"].append(D["v"][i] or 0)
+            out["v"].append(D["v"][i] or 0); out["e"].append(D["t"][i]+300)
         else:
+            out["e"][-1]=D["t"][i]+300
             out["h"][-1]=max(out["h"][-1],D["h"][i]); out["l"][-1]=min(out["l"][-1],D["l"][i]); out["c"][-1]=D["c"][i]; out["v"][-1]+=D["v"][i] or 0
     return out
 def buys5(D):
@@ -56,23 +58,32 @@ def svti(c):
     for i in range(14,n): raw[i]=(c[i]-c[i-14])*0.6+(c[i]-c[i-8])*1.4
     for i in range(16,n): s[i]=sum(raw[i-2:i+1])/3*1.8
     return s
-def sim(D,XUS,B5=()):
-    t,o,h,l,c=D["t"],D["o"],D["h"],D["l"],D["c"]; v=[x or 0 for x in D["v"]]; n=len(c); s=svti(c)
-    atr=[None]*n; a=None
+def atr_rma(D):
+    h,l,c=D["h"],D["l"],D["c"]; n=len(c); atr=[None]*n; a=None
     for i in range(1,n):
         tr=max(h[i]-l[i],abs(h[i]-c[i-1]),abs(l[i]-c[i-1])); a=tr if a is None else (a*13+tr)/14; atr[i]=a
-    ip=False; trades=[]; cur=None
-    for i in range(30,n):
-        vavg=sum(v[i-19:i+1])/20
-        if ip:
-            if c[i]<trl:
-                cur.update(cikis=tstr(t[i]),cikis_fiyat=c[i],getiri=round((c[i]/cur["giris_fiyat"]-1-COST)*100,2)); trades.append(cur); ip=False
-            else: trl=max(trl,c[i]-atr[i]*ATRM)
-        x=XUS.get(t[i])
-        if not ip and s[i-1] is not None and s[i-1]<=0<s[i] and c[i]>o[i] and vavg>0 and v[i]>vavg*VOLK and x is not None and x>0:
-            ip=True; trl=c[i]-atr[i]*ATRM
-            E=t[i]+900
-            cur={"giris":tstr(t[i]),"giris_fiyat":c[i],"hacim_kat":round(v[i]/vavg,1),"onay5":int(any(E-1800<=b<=E for b in B5))}
+    return atr
+def sim(D,D10,XUS,B5=()):
+    """AL 15dk barlarında, SAT 10dk barlarında; olaylar bar bitiş zamanına göre sıralanır (önce 10dk/SAT)."""
+    t,o,c=D["t"],D["o"],D["c"]; v=[x or 0 for x in D["v"]]; n=len(c); s=svti(c)
+    t10,c10,e10=D10["t"],D10["c"],D10["e"]; atr10=atr_rma(D10)
+    ev=[(e10[j],0,j) for j in range(len(c10))]+[(D["e"][i],1,i) for i in range(30,n)]
+    ev.sort()
+    ip=False; trades=[]; cur=None; trl=None; last_atr=None
+    for _,kind,k in ev:
+        if kind==0:
+            if atr10[k] is None: continue
+            if ip:
+                if c10[k]<trl:
+                    cur.update(cikis=tstr(t10[k]),cikis_fiyat=c10[k],getiri=round((c10[k]/cur["giris_fiyat"]-1-COST)*100,2)); trades.append(cur); ip=False
+                else: trl=max(trl,c10[k]-atr10[k]*ATRM)
+            last_atr=atr10[k]
+        else:
+            i=k; vavg=sum(v[i-19:i+1])/20; x=XUS.get(t[i])
+            if not ip and last_atr is not None and s[i-1] is not None and s[i-1]<=0<s[i] and c[i]>o[i] and vavg>0 and v[i]>vavg*VOLK and x is not None and x>0:
+                ip=True; trl=c[i]-last_atr*ATRM
+                E=t[i]+900
+                cur={"giris":tstr(t[i]),"giris_fiyat":c[i],"hacim_kat":round(v[i]/vavg,1),"onay5":int(any(E-1800<=b<=E for b in B5))}
     acik=None
     if ip: acik=dict(cur,stop=round(trl,2),son=c[-1],anlik=round((c[-1]/cur["giris_fiyat"]-1)*100,2))
     return trades,acik,s[-1],tstr(t[-1])[:10]
@@ -85,9 +96,9 @@ xu_son=xs[-1]
 bugun_al=[];bugun_sat=[];aciklar=[];kapananlar=[];eksik=[]
 for b in A.bar:
     sym,p=b.split("=",1)
-    try: D5=load(p); D=agg(D5,15); B5=buys5(D5)
+    try: D5=load(p); D=agg(D5,15); D10=agg(D5,10); B5=buys5(D5)
     except Exception: eksik.append(sym); continue
-    tr,ac,sl,son=sim(D,XUS,B5)
+    tr,ac,sl,son=sim(D,D10,XUS,B5)
     if son!=A.bugun: eksik.append(sym)
     for x in tr:
         x["sembol"]=sym
@@ -138,6 +149,6 @@ L.append(ist([r for r in rows if str(r.get("onay5"))=="1"],"✓5dk onaylı (son 
 L.append(ist([r for r in rows if str(r.get("onay5"))=="0"],"5dk onaysız"))
 if eksik: L.append(f"Veri alınamayan / güncel olmayan: {e(', '.join(eksik))}")
 L.append("")
-L.append("<i>Kural (15dk): SVTI 0 yukarı kesişim + yeşil mum + hacim ≥ x1,5 + XU100 15dk SVTI &gt; 0 → AL; ATR(14)x3 iz süren stop → SAT. ✓5dk = son 30 dk içinde 5dk'da da AL geldi. Kağıt üzerinde takip, yatırım tavsiyesi değildir.</i>")
+L.append("<i>Kural (15dk): SVTI 0 yukarı kesişim + yeşil mum + hacim ≥ x1,5 + XU100 15dk SVTI &gt; 0 → AL; 10dk ATR(14)x3 iz süren stop (10dk kapanışta) → SAT. ✓5dk = son 30 dk içinde 5dk'da da AL geldi. Kağıt üzerinde takip, yatırım tavsiyesi değildir.</i>")
 open(A.mesaj,"w",encoding="utf-8").write("\n".join(L))
 print(f"OZET= AL:{len(bugun_al)} SAT:{len(bugun_sat)} ACIK:{len(aciklar)} KAPANAN_TOPLAM:{len(gr)} XU15:{xu_son:+.2f} EKSIK:{','.join(eksik) or '-'}")
