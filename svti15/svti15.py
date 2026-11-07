@@ -111,7 +111,7 @@ json.dump({"tarih":A.bugun,"acik":aciklar},open(A.acik,"w"),ensure_ascii=False,i
 ay=["","Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"]
 y,m,d=A.bugun.split("-"); g=f"{int(d)} {ay[int(m)]}"
 def e(s): return str(s).replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
-L=[f"<b>SVTI 15dk · 43 hisse · gün sonu · {g}</b>",
+L=[f"<b>SVTI 15dk · {len(A.bar)} hisse · gün sonu · {g}</b>",
    f"XU100 15dk SVTI kapanış: <b>{xu_son:+.2f}</b> → {'AL serbest ✓' if xu_son>0 else 'AL engelli ✗'}",""]
 L.append(f"<b>🟢 Bugün AL ({len(bugun_al)})</b>")
 for x in sorted(bugun_al,key=lambda x:x["giris"]):
