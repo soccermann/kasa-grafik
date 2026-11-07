@@ -1,0 +1,113 @@
+//@version=6
+// SVTI 15dk — Webhook AL/SAT (svti15.py ile aynı kural)
+//  AL : SVTI 0'ı yukarı keser + yeşil mum + hacim > 20 bar ort. x1,5 + XU100 15dk SVTI > 0
+//  SAT: kapanış < ATR(14) x 3 iz süren stop (stop sadece yukarı gider)
+//  Emir: bar kapanışında, LMT, GUN, aracı kurumun JSON formatında (buyOrCell / orderType / seance / symbol / quantity / price)
+// KURULUM: grafiği 15 dakikaya alın → göstergeyi ekleyin → Alarm oluştur → Koşul: bu gösterge, "Any alert() function call"
+//          → Webhook URL'si: aracı kurumun verdiği API Link → Mesaj alanını BOŞ bırakın (mesajı kod üretir).
+indicator("SVTI 15dk Webhook", overlay = true, max_labels_count = 500)
+
+// ───────── Girdiler ─────────
+grpS = "Sinyal"
+volK   = input.float(1.5, "Hacim katsayısı", group = grpS)
+atrM   = input.float(3.0, "ATR çarpanı (iz süren stop)", group = grpS)
+useXU  = input.bool(true, "XU100 15dk SVTI > 0 filtresi", group = grpS)
+only5  = input.bool(false, "Sadece 5dk onaylı AL (son 30 dk içinde 5dk AL)", group = grpS)
+
+grpE = "Emir"
+qtyMode  = input.string("TL bütçe", "Miktar", options = ["TL bütçe", "Sabit lot"], group = grpE)
+budget   = input.float(10000, "İşlem başı bütçe (TL)", minval = 1, group = grpE)
+lotFix   = input.int(1, "Sabit lot", minval = 1, group = grpE)
+offBuy   = input.float(0.2, "AL limit payı % (kapanışın üstü)", minval = 0, group = grpE)
+offSell  = input.float(0.2, "SAT limit payı % (kapanışın altı)", minval = 0, group = grpE)
+sellTxt  = input.string("Sell", "Satış için buyOrCell değeri", group = grpE)
+startT   = input.time(timestamp("2026-11-09T10:00:00+03:00"), "Emir gönderme başlangıcı", group = grpE)
+sess     = input.session("1000-1800", "AL verilecek saatler (bar açılışı)", group = grpE)
+exclude  = input.string("TERA", "Hariç semboller (virgülle: TERA,ABC)", group = grpE)
+
+if timeframe.period != "15"
+    runtime.error("Bu gösterge 15 dakikalık grafikte çalışır.")
+
+// ───────── Hesaplar ─────────
+f_svti(src) =>
+    raw = (src - src[14]) * 0.6 + (src - src[8]) * 1.4
+    ta.sma(raw, 3) * 1.8
+
+// BIST fiyat adımı
+f_tick(p) =>
+    p < 20 ? 0.01 : p < 50 ? 0.02 : p < 100 ? 0.05 : p < 250 ? 0.1 : p < 500 ? 0.25 : p < 1000 ? 0.5 : p < 2500 ? 1.0 : 2.5
+
+f_up(p) =>
+    t = f_tick(p)
+    math.round(math.ceil(math.round(p / t, 6)) * t, 2)
+
+f_dn(p) =>
+    t = f_tick(p)
+    math.round(math.floor(math.round(p / t, 6)) * t, 2)
+
+// 5dk kural (XU filtresiz), son 30 dk (7 adet 5dk bar) içinde AL geldi mi
+f_buy5() =>
+    s5 = f_svti(close)
+    a5 = ta.atr(14)
+    v5 = ta.sma(volume, 20)
+    var bool ip5 = false
+    var float tr5 = na
+    bool b5 = false
+    if ip5
+        if close < tr5
+            ip5 := false
+        else
+            tr5 := math.max(tr5, close - a5 * atrM)
+    if not ip5 and s5[1] <= 0 and s5 > 0 and close > open and v5 > 0 and volume > v5 * volK
+        ip5 := true
+        tr5 := close - a5 * atrM
+        b5 := true
+    bs = ta.barssince(b5)
+    not na(bs) and bs <= 6
+
+s    = f_svti(close)
+atr  = ta.atr(14)
+vavg = ta.sma(volume, 20)
+xu   = request.security("BIST:XU100", "15", f_svti(close), lookahead = barmerge.lookahead_off)
+ok5  = request.security(syminfo.tickerid, "5", f_buy5(), lookahead = barmerge.lookahead_off)
+
+exList   = "," + str.replace_all(str.upper(exclude), " ", "") + ","
+excluded = str.contains(exList, "," + syminfo.ticker + ",")
+inSess   = not na(time(timeframe.period, sess, "Europe/Istanbul"))
+
+f_msg(side, q, px) =>
+    '{"buyOrCell":"' + side + '","orderType":"LMT","seance":"GUN","symbol":"' + syminfo.ticker + '","quantity":"' + str.tostring(q) + '","price":"' + str.tostring(px, "#.##") + '"}'
+
+// ───────── Pozisyon takibi ─────────
+var bool  inPos = false
+var float trl   = na
+var int   qty   = 0
+var bool  live  = false   // bu pozisyonun AL emri gerçekten gönderildi mi (başlangıç zamanından sonra)
+
+sellSig = false
+if inPos
+    if close < trl
+        sellSig := true
+        inPos := false
+        if live and barstate.isconfirmed
+            alert(f_msg(sellTxt, qty, f_dn(close * (1 - offSell / 100))), alert.freq_once_per_bar_close)
+    else
+        trl := math.max(trl, close - atr * atrM)
+
+buyRaw = not inPos and s[1] <= 0 and s > 0 and close > open and vavg > 0 and volume > vavg * volK and (not useXU or xu > 0)
+buyPx  = f_up(close * (1 + offBuy / 100))
+q      = qtyMode == "TL bütçe" ? int(math.floor(budget / buyPx)) : lotFix
+buySig = buyRaw and inSess and not excluded and (not only5 or ok5) and q >= 1
+
+if buySig
+    inPos := true
+    trl   := close - atr * atrM
+    qty   := q
+    live  := time >= startT
+    if live and barstate.isconfirmed
+        alert(f_msg("Buy", qty, buyPx), alert.freq_once_per_bar_close)
+
+// ───────── Grafik ─────────
+plot(inPos ? trl : na, "İz süren stop", color.red, 1, plot.style_linebr)
+plotshape(buySig, "AL", shape.triangleup, location.belowbar, color.green, text = "AL")
+plotshape(sellSig, "SAT", shape.triangledown, location.abovebar, color.red, text = "SAT")
