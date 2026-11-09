@@ -1,64 +1,74 @@
 {
- "tarih": "2026-11-06",
+ "tarih": "2026-11-09",
  "acik": [
   {
-   "giris": "2026-11-06 14:30",
-   "giris_fiyat": 24.2,
-   "hacim_kat": 3.3,
+   "giris": "2026-11-09 10:00",
+   "giris_fiyat": 4.74,
+   "hacim_kat": 2.6,
    "onay5": 0,
-   "stop": 24.05,
-   "son": 24.52,
-   "anlik": 1.32,
-   "sembol": "BAKAB"
+   "stop": 4.76,
+   "son": 4.8,
+   "anlik": 1.27,
+   "sembol": "AKGRT"
   },
   {
-   "giris": "2026-11-06 17:45",
-   "giris_fiyat": 17.4,
-   "hacim_kat": 3.8,
+   "giris": "2026-11-09 10:30",
+   "giris_fiyat": 17.18,
+   "hacim_kat": 2.2,
    "onay5": 0,
-   "stop": 17.01,
-   "son": 17.44,
-   "anlik": 0.23,
+   "stop": 17.25,
+   "son": 17.52,
+   "anlik": 1.98,
    "sembol": "CEOEM"
   },
   {
-   "giris": "2026-11-06 15:15",
-   "giris_fiyat": 15.33,
-   "hacim_kat": 1.7,
+   "giris": "2026-11-09 17:15",
+   "giris_fiyat": 7.33,
+   "hacim_kat": 3.6,
    "onay5": 0,
-   "stop": 15.06,
-   "son": 15.23,
-   "anlik": -0.65,
-   "sembol": "EKIM"
+   "stop": 7.24,
+   "son": 7.33,
+   "anlik": 0.0,
+   "sembol": "DZGYO"
   },
   {
    "giris": "2026-11-06 16:15",
    "giris_fiyat": 30.84,
    "hacim_kat": 2.7,
    "onay5": 1,
-   "stop": 30.53,
-   "son": 31.06,
-   "anlik": 0.71,
+   "stop": 32.36,
+   "son": 32.76,
+   "anlik": 6.23,
    "sembol": "EREGL"
   },
   {
-   "giris": "2026-11-05 10:45",
-   "giris_fiyat": 57.5,
-   "hacim_kat": 1.6,
+   "giris": "2026-11-09 15:00",
+   "giris_fiyat": 59.2,
+   "hacim_kat": 4.4,
    "onay5": 0,
-   "stop": 58.69,
-   "son": 60.3,
-   "anlik": 4.87,
+   "stop": 59.45,
+   "son": 62.2,
+   "anlik": 5.07,
    "sembol": "KRDMB"
+  },
+  {
+   "giris": "2026-11-09 15:30",
+   "giris_fiyat": 7.68,
+   "hacim_kat": 3.2,
+   "onay5": 0,
+   "stop": 7.6,
+   "son": 7.61,
+   "anlik": -0.91,
+   "sembol": "PINSU"
   },
   {
    "giris": "2026-11-06 17:30",
    "giris_fiyat": 34.1,
-   "hacim_kat": 1.8,
+   "hacim_kat": 1.5,
    "onay5": 1,
-   "stop": 33.63,
-   "son": 34.24,
-   "anlik": 0.41,
+   "stop": 35.15,
+   "son": 35.48,
+   "anlik": 4.05,
    "sembol": "SISE"
   },
   {
@@ -66,20 +76,10 @@
    "giris_fiyat": 289,
    "hacim_kat": 1.7,
    "onay5": 0,
-   "stop": 289.07,
-   "son": 294.5,
-   "anlik": 1.9,
+   "stop": 300.82,
+   "son": 303.75,
+   "anlik": 5.1,
    "sembol": "TAVHL"
-  },
-  {
-   "giris": "2026-11-06 15:15",
-   "giris_fiyat": 5.05,
-   "hacim_kat": 1.7,
-   "onay5": 1,
-   "stop": 5.0,
-   "son": 5.05,
-   "anlik": 0.0,
-   "sembol": "ZERGY"
   }
  ]
 }
