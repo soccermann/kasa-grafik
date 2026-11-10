@@ -1,85 +1,25 @@
 {
- "tarih": "2026-11-09",
+ "tarih": "2026-11-10",
  "acik": [
-  {
-   "giris": "2026-11-09 10:00",
-   "giris_fiyat": 4.74,
-   "hacim_kat": 2.6,
-   "onay5": 0,
-   "stop": 4.76,
-   "son": 4.8,
-   "anlik": 1.27,
-   "sembol": "AKGRT"
-  },
   {
    "giris": "2026-11-09 10:30",
    "giris_fiyat": 17.18,
    "hacim_kat": 2.2,
    "onay5": 0,
-   "stop": 17.25,
-   "son": 17.52,
-   "anlik": 1.98,
+   "stop": 17.52,
+   "son": 17.75,
+   "anlik": 3.32,
    "sembol": "CEOEM"
-  },
-  {
-   "giris": "2026-11-09 17:15",
-   "giris_fiyat": 7.33,
-   "hacim_kat": 3.6,
-   "onay5": 0,
-   "stop": 7.24,
-   "son": 7.33,
-   "anlik": 0.0,
-   "sembol": "DZGYO"
-  },
-  {
-   "giris": "2026-11-06 16:15",
-   "giris_fiyat": 30.84,
-   "hacim_kat": 2.7,
-   "onay5": 1,
-   "stop": 32.36,
-   "son": 32.76,
-   "anlik": 6.23,
-   "sembol": "EREGL"
   },
   {
    "giris": "2026-11-09 15:00",
    "giris_fiyat": 59.2,
    "hacim_kat": 4.4,
    "onay5": 0,
-   "stop": 59.45,
-   "son": 62.2,
-   "anlik": 5.07,
+   "stop": 63.4,
+   "son": 63.7,
+   "anlik": 7.6,
    "sembol": "KRDMB"
-  },
-  {
-   "giris": "2026-11-09 15:30",
-   "giris_fiyat": 7.68,
-   "hacim_kat": 3.2,
-   "onay5": 0,
-   "stop": 7.6,
-   "son": 7.61,
-   "anlik": -0.91,
-   "sembol": "PINSU"
-  },
-  {
-   "giris": "2026-11-06 17:30",
-   "giris_fiyat": 34.1,
-   "hacim_kat": 1.5,
-   "onay5": 1,
-   "stop": 35.15,
-   "son": 35.48,
-   "anlik": 4.05,
-   "sembol": "SISE"
-  },
-  {
-   "giris": "2026-11-06 16:45",
-   "giris_fiyat": 289,
-   "hacim_kat": 1.7,
-   "onay5": 0,
-   "stop": 300.82,
-   "son": 303.75,
-   "anlik": 5.1,
-   "sembol": "TAVHL"
   }
  ]
 }
