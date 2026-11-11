@@ -1,25 +1,4 @@
 {
- "tarih": "2026-11-10",
- "acik": [
-  {
-   "giris": "2026-11-09 10:30",
-   "giris_fiyat": 17.18,
-   "hacim_kat": 2.2,
-   "onay5": 0,
-   "stop": 17.52,
-   "son": 17.75,
-   "anlik": 3.32,
-   "sembol": "CEOEM"
-  },
-  {
-   "giris": "2026-11-09 15:00",
-   "giris_fiyat": 59.2,
-   "hacim_kat": 4.4,
-   "onay5": 0,
-   "stop": 63.4,
-   "son": 63.7,
-   "anlik": 7.6,
-   "sembol": "KRDMB"
-  }
- ]
+ "tarih": "2026-11-11",
+ "acik": []
 }
