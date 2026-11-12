@@ -1,4 +1,35 @@
 {
- "tarih": "2026-11-11",
- "acik": []
+ "tarih": "2026-11-12",
+ "acik": [
+  {
+   "giris": "2026-11-12 12:45",
+   "giris_fiyat": 17.64,
+   "hacim_kat": 3.9,
+   "onay5": 1,
+   "stop": 17.91,
+   "son": 18,
+   "anlik": 2.04,
+   "sembol": "CEOEM"
+  },
+  {
+   "giris": "2026-11-12 16:00",
+   "giris_fiyat": 65.25,
+   "hacim_kat": 3.5,
+   "onay5": 1,
+   "stop": 65.12,
+   "son": 65.15,
+   "anlik": -0.15,
+   "sembol": "KRDMB"
+  },
+  {
+   "giris": "2026-11-12 10:15",
+   "giris_fiyat": 104.2,
+   "hacim_kat": 2.0,
+   "onay5": 0,
+   "stop": 107.95,
+   "son": 110.5,
+   "anlik": 6.05,
+   "sembol": "PKENT"
+  }
+ ]
 }
