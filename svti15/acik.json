@@ -1,35 +1,4 @@
 {
- "tarih": "2026-11-13",
- "acik": [
-  {
-   "giris": "2026-11-13 14:30",
-   "giris_fiyat": 27.72,
-   "hacim_kat": 1.8,
-   "onay5": 0,
-   "stop": 27.59,
-   "son": 27.7,
-   "anlik": -0.07,
-   "sembol": "AGHOL"
-  },
-  {
-   "giris": "2026-11-13 15:45",
-   "giris_fiyat": 2.9,
-   "hacim_kat": 2.0,
-   "onay5": 0,
-   "stop": 2.87,
-   "son": 2.9,
-   "anlik": 0.0,
-   "sembol": "BEGYO"
-  },
-  {
-   "giris": "2026-11-13 13:45",
-   "giris_fiyat": 14.57,
-   "hacim_kat": 1.7,
-   "onay5": 0,
-   "stop": 14.55,
-   "son": 14.6,
-   "anlik": 0.21,
-   "sembol": "ENERY"
-  }
- ]
+ "tarih": "2026-11-17",
+ "acik": []
 }
