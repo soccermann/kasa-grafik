@@ -1,4 +1,15 @@
 {
- "tarih": "2026-11-18",
- "acik": []
+ "tarih": "2026-11-19",
+ "acik": [
+  {
+   "giris": "2026-11-19 16:30",
+   "giris_fiyat": 106.9,
+   "hacim_kat": 4.1,
+   "onay5": 1,
+   "stop": 112.37,
+   "son": 115,
+   "anlik": 7.58,
+   "sembol": "PKENT"
+  }
+ ]
 }
